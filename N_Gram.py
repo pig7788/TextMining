@@ -31,7 +31,7 @@ def ngram(textList, maxTermLength, minFreq):
         words_freq_dict = {} #存放'字詞':詞頻
         result = [] #存放最後的結果
         
-        for strList in textList: #從上一個方法中取得回傳值，並且一一取出
+        for strList in textList: #從上一個方法中取得回傳值，並且一一取出，['字串', '字串', '字串', '字串'...]
             for length in range(0, len(strList) - (maxTermLength - 1)): #從0開始，並且
                 words.append(strList[length:length + maxTermLength])
         
@@ -40,9 +40,9 @@ def ngram(textList, maxTermLength, minFreq):
                 words_freq_dict[word] = words.count(word)
         
         words_freq_list = sorted(words_freq_dict.iteritems(), key = operator.itemgetter(1), reverse = True)
-        #針對存放{'字詞':詞頻}的字典做排序，並形成一個list[['字詞',詞頻], ['字詞',詞頻], ['字詞',詞頻]...]
+        #針對存放{'字詞':詞頻}的字典做排序，並轉換成一個list[['字詞',詞頻], ['字詞',詞頻], ['字詞',詞頻]...]
         
-        for word in words_freq_list: #針對list中的元素，一一取出
+        for word in words_freq_list: #針對list中的元素，一一取出[['字詞',詞頻], ['字詞',詞頻], ['字詞',詞頻]...]
             if word[1] >= minFreq: #如果取出來的所對應到索引值[1]的元素≧minFreq，一一將word這個list加進result內
                 result.append(word)
         
@@ -63,7 +63,7 @@ def longTermPriority(filePath, maxTermLength, minFreq): #(檔案路徑，字詞�
         return longTermsFreq #回傳list
 
 def resultPrintOut(TermFreqResult):
-    print '字詞', '詞頻'
-    print '========='
+    print '字詞', '\t詞頻'
+    print '============'
     for result in TermFreqResult: #印出結果
-        print result[0], result[1]
+        print result[0], '\t' + str(result[1])

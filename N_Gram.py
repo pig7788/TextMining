@@ -32,8 +32,9 @@ def ngram(textList, maxTermLength, minFreq):
         result = [] #存放最後的結果
         
         for strList in textList: #從上一個方法中取得回傳值，並且一一取出，['字串', '字串', '字串', '字串'...]
-            for length in range(0, len(strList) - (maxTermLength - 1)): #從0開始，並且
-                words.append(strList[length:length + maxTermLength])
+            for length in range(0, len(strList) - (maxTermLength - 1)):
+                #假設字詞長度10，想每次要取的字詞長度是3，所以取到最後的索引值應該是10-(3-1)=8才對，可是range是n-1，實際上取到的是[7]
+                words.append(strList[length:length + maxTermLength]) #將指定的索引值範圍取出的元素，丟入存放長詞的list
         
         for word in words:
             if word not in words_freq_dict: #如果取出的中文字詞(key)不在dictionary內，則計算有該字詞的數量，並且丟入指定的key
